@@ -267,7 +267,7 @@
 
         let noCount = 0;
 
-        noBtn.addEventListener("mouseenter", moveNo);
+        // noBtn.addEventListener("mouseenter", moveNo);
 
         // noBtn.addEventListener("click", (e) => {
         //     e.preventDefault();
@@ -275,32 +275,67 @@
         //     moveNo();
         // });
 
+        if (window.matchMedia("(hover: hover)").matches) {
+    noBtn.addEventListener("mouseenter", moveNo);
+}
+
         noBtn.addEventListener("pointerdown", (e) => {
             e.preventDefault();
             e.stopPropagation();
             moveNo();
         });
 
+        // function moveNo() {
+        //     noWrapper.style.pointerEvents = "none";
+        //     const step = steps[noCount % steps.length];
+        //     noWrapper.classList.add("active");
+        //     noMessage.style.display = "inline-block";
+        //     noMessage.textContent = step.text;
+        //     setGif(step.gif, teddyWrap);
+        //     noCount++;
+
+        //     noWrapper.style.position = "fixed";
+        //     const padding = 20;
+        //     const x = Math.random() * (window.innerWidth - noWrapper.offsetWidth - padding);
+        //     const y = Math.random() * (window.innerHeight - noWrapper.offsetHeight - padding);
+        //     noWrapper.style.left = `${x}px`;
+        //     noWrapper.style.top = `${y}px`;
+
+        //     setTimeout(() => {
+        //         noWrapper.style.pointerEvents = "auto";
+        //     }, 300);
+        // }
+
         function moveNo() {
-            noWrapper.style.pointerEvents = "none";
-            const step = steps[noCount % steps.length];
-            noWrapper.classList.add("active");
-            noMessage.style.display = "inline-block";
-            noMessage.textContent = step.text;
-            setGif(step.gif, teddyWrap);
-            noCount++;
+    // Prevent tap-through (mobile safety)
+    noWrapper.style.pointerEvents = "none";
 
-            noWrapper.style.position = "fixed";
-            const padding = 20;
-            const x = Math.random() * (window.innerWidth - noWrapper.offsetWidth - padding);
-            const y = Math.random() * (window.innerHeight - noWrapper.offsetHeight - padding);
-            noWrapper.style.left = `${x}px`;
-            noWrapper.style.top = `${y}px`;
+    const step = steps[noCount % steps.length];
+    noCount++;
 
-            setTimeout(() => {
-                noWrapper.style.pointerEvents = "auto";
-            }, 300);
-        }
+    noWrapper.classList.add("active");
+
+    noMessage.style.display = "inline-block";
+    noMessage.textContent = step.text;
+
+    setGif(step.gif, teddyWrap);
+
+    noWrapper.style.position = "fixed";
+
+    const padding = 20;
+    const maxX = Math.max(padding, window.innerWidth - noWrapper.offsetWidth - padding);
+    const maxY = Math.max(padding, window.innerHeight - noWrapper.offsetHeight - padding);
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    noWrapper.style.left = `${x}px`;
+    noWrapper.style.top = `${y}px`;
+
+    setTimeout(() => {
+        noWrapper.style.pointerEvents = "auto";
+    }, 300);
+}
 
         yesBtn.addEventListener("click", () => {
             noWrapper.style.display = "none";
@@ -320,6 +355,7 @@
 
 
 </html>
+
 
 
 

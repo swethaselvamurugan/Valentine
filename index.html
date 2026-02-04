@@ -97,7 +97,6 @@
             align-items: center;
             gap: 2px;
             z-index: 9999;
-            touch-action: manipulation;
             position: relative;
         }
 
@@ -161,10 +160,10 @@
                 height: 150px;
             }
 
-            button {
+            /* button {
                 width: 100%;
                 padding: 10px 0;
-            }
+            } */
 
             .btn-container {
                 gap: 12px;
@@ -173,7 +172,6 @@
             .no-wrapper {
                 width: 100%;
                 max-width: 200px;
-                z-index: 9999:
             }
             
             .no-wrapper.active {
@@ -268,75 +266,24 @@
 
         let noCount = 0;
 
-        // noBtn.addEventListener("mouseenter", moveNo);
-
-        // noBtn.addEventListener("click", (e) => {
-        //     e.preventDefault();
-        //     e.stopPropagation();
-        //     moveNo();
-        // });
-
-        if (window.matchMedia("(hover: hover)").matches) {
-    noBtn.addEventListener("mouseenter", moveNo);
-}
-
-        noBtn.addEventListener("pointerdown", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            moveNo();
-        });
-
-        // function moveNo() {
-        //     noWrapper.style.pointerEvents = "none";
-        //     const step = steps[noCount % steps.length];
-        //     noWrapper.classList.add("active");
-        //     noMessage.style.display = "inline-block";
-        //     noMessage.textContent = step.text;
-        //     setGif(step.gif, teddyWrap);
-        //     noCount++;
-
-        //     noWrapper.style.position = "fixed";
-        //     const padding = 20;
-        //     const x = Math.random() * (window.innerWidth - noWrapper.offsetWidth - padding);
-        //     const y = Math.random() * (window.innerHeight - noWrapper.offsetHeight - padding);
-        //     noWrapper.style.left = `${x}px`;
-        //     noWrapper.style.top = `${y}px`;
-
-        //     setTimeout(() => {
-        //         noWrapper.style.pointerEvents = "auto";
-        //     }, 300);
-        // }
+        noBtn.addEventListener("mouseenter", moveNo);
+        noBtn.addEventListener("click", moveNo);
 
         function moveNo() {
-    // Prevent tap-through (mobile safety)
-    noWrapper.style.pointerEvents = "none";
+            const step = steps[noCount % steps.length];
+            noWrapper.classList.add("active");
+            noMessage.style.display = "inline-block";
+            noMessage.textContent = step.text;
+            setGif(step.gif, teddyWrap);
+            noCount++;
 
-    const step = steps[noCount % steps.length];
-    noCount++;
-
-    noWrapper.classList.add("active");
-
-    noMessage.style.display = "inline-block";
-    noMessage.textContent = step.text;
-
-    setGif(step.gif, teddyWrap);
-
-    noWrapper.style.position = "fixed";
-
-    const padding = 20;
-    const maxX = Math.max(padding, window.innerWidth - noWrapper.offsetWidth - padding);
-    const maxY = Math.max(padding, window.innerHeight - noWrapper.offsetHeight - padding);
-
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
-
-    noWrapper.style.left = `${x}px`;
-    noWrapper.style.top = `${y}px`;
-
-    setTimeout(() => {
-        noWrapper.style.pointerEvents = "auto";
-    }, 300);
-}
+            noWrapper.style.position = "fixed";
+            const padding = 20;
+            const x = Math.random() * (window.innerWidth - noWrapper.offsetWidth - padding);
+            const y = Math.random() * (window.innerHeight - noWrapper.offsetHeight - padding);
+            noWrapper.style.left = `${x}px`;
+            noWrapper.style.top = `${y}px`;
+        }
 
         yesBtn.addEventListener("click", () => {
             noWrapper.style.display = "none";
@@ -356,6 +303,7 @@
 
 
 </html>
+
 
 
 
